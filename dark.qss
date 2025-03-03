@@ -1,0 +1,76 @@
+/* Base window background */
+QMainWindow, QWidget, QDialog {
+    background-color: #1E1E1E;
+    color: #D4D4D4;
+}
+/* Group boxes */
+QGroupBox {
+    border: 1px solid #3C3C3C;
+    border-radius: 4px;
+    margin-top: 2ex;
+    background-color: #2D2D2D;
+}
+QGroupBox:title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 3px;
+}
+/* Push buttons */
+QPushButton {
+    background-color: #3C3C3C;
+    color: #D4D4D4;
+    border: 1px solid #3C3C3C;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+QPushButton:hover {
+    background-color: #007ACC;
+}
+QPushButton:disabled {
+    background-color: #2D2D2D;
+    color: #7A7A7A;
+    border: 1px solid #3C3C3C;
+}
+/* Sliders */
+QSlider::groove:horizontal {
+    height: 4px;
+    background: #3C3C3C;
+    margin: 2px 0;
+    border-radius: 2px;
+}
+QSlider::handle:horizontal {
+    background: #007ACC;
+    width: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+/* SpinBoxes */
+QSpinBox, QDoubleSpinBox {
+    background-color: #3C3C3C;
+    color: #D4D4D4;
+    border: 1px solid #555555;
+    border-radius: 4px;
+}
+/* Labels */
+QLabel {
+    color: #D4D4D4;
+    background-color: #2D2D2D; 
+}
+/* FormLayout Labels */
+QFormLayout QLabel {
+    background-color: #2D2D2D; 
+}
+/* Scrollbars */
+QScrollBar:vertical {
+    background: #2D2D2D;
+    width: 10px;
+    margin: 0px;
+}
+QScrollBar::handle:vertical {
+    background: #3C3C3C;
+    min-height: 20px;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+    subcontrol-position: none;
+}
