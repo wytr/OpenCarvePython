@@ -1,0 +1,7 @@
+\babel@toc {ngerman}{}\relax 
+\beamer@sectionintoc {1}{Einführung}{3}{0}{1}
+\beamer@sectionintoc {2}{Verwendete Technologien}{4}{0}{2}
+\beamer@sectionintoc {3}{Bedienungsablauf}{5}{0}{3}
+\beamer@sectionintoc {4}{Parameterübersicht}{6}{0}{4}
+\beamer@sectionintoc {5}{G-Code Postprozessor}{7}{0}{5}
+\beamer@sectionintoc {6}{Fazit und Ausblick}{8}{0}{6}

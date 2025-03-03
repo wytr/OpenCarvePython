@@ -1,0 +1,110 @@
+\documentclass[14pt, aspectratio=169]{beamer}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{dirtree}
+\usepackage{courier}
+
+\setbeamertemplate{navigation symbols}{} % Keine Navigationsleiste
+\usetheme{Antibes}
+
+% Title page information
+\title{OpenCarve --- Bild-zu-G-Code Umwandlung und 3D-Visualisierung}
+\author{Martin Winter}
+\institute{3D-Prototyping}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+  \frametitle{Inhalt}
+  \tableofcontents
+\end{frame}
+
+\section{Einführung}
+\begin{frame}
+  \frametitle{Einführung}
+  \begin{itemize}
+    \item OpenCarve wandelt Graustufenbilder in G-Code um.
+    \item Der G-Code kann direkt an CNC-Maschinen übertragen werden.
+    \item Zusätzlich bietet das Tool eine 3D-Visualisierung des Toolpaths.
+  \end{itemize}
+\end{frame}
+
+\section{Verwendete Technologien}
+\begin{frame}
+  \frametitle{Verwendete Technologien}
+  \begin{itemize}
+    \item \textbf{Python:} Als Hauptprogrammiersprache zur schnellen Entwicklung.
+    \item \textbf{PyQt5:} Für die Erstellung der grafischen Benutzeroberfläche.
+    \item \textbf{OpenGL:} Für die 3D-Visualisierung des G-Codes.
+    \item \textbf{NumPy \& Pillow:} Für Bildverarbeitung und numerische Berechnungen.
+  \end{itemize}
+\end{frame}
+
+\section{Bedienungsablauf}
+\begin{frame}
+  \frametitle{Bedienungsablauf}
+  \begin{enumerate}
+    \item \textbf{Bild laden:} 
+      \begin{itemize}
+        \item Klicken Sie auf \texttt{Load Image}, um ein Graustufenbild zu laden.
+      \end{itemize}
+
+    \item \textbf{Parameter einstellen:}
+      \begin{itemize}
+        \item Stellen Sie Parameter wie Pixelgröße, maximale Tiefe, Safe Z, Vorschubgeschwindigkeit, Spindeldrehzahl, Step-Down und Boundary Margin ein.
+      \end{itemize}
+    \item \textbf{G-Code generieren:}
+      \begin{itemize}
+        \item Mit \texttt{Generate G-Code} wird der Code erstellt und in einem separaten Panel angezeigt.
+      \end{itemize}
+    \item \textbf{G-Code kopieren und speichern:}
+      \begin{itemize}
+        \item Nutzen Sie die Copy- und Save-Buttons, um den Code in die Zwischenablage zu kopieren oder als Datei zu speichern.
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\section{Parameterübersicht}
+\begin{frame}
+  \frametitle{Parameterübersicht}
+  \begin{itemize}
+    \item \textbf{Pixel Size:} Bestimmt den Maßstab des Bildes in mm.
+    \item \textbf{Max Depth:} Legt die maximale Schnitttiefe fest.
+    \item \textbf{Safe Z:} Definiert die Höhe, bei der schnelle (rapide) Bewegungen stattfinden.
+    \item \textbf{Feed Rate XY und Z:} Bestimmt die Geschwindigkeit der Maschine (XY und Z).
+    \item \textbf{Spindle Speed:} Gibt die Drehzahl der Fräse an.
+    \item \textbf{Step-Down:} Legt die Schrittweite fest, in der die maximale Tiefe erreicht wird.
+    \item \textbf{Boundary Margin:} Rand um den Arbeitsbereich.
+  \end{itemize}
+\end{frame}
+
+\section{G-Code Postprozessor}
+\begin{frame}
+  \frametitle{G-Code Postprozessor}
+  \begin{itemize}
+    \item Optimiert den generierten G-Code.
+    \item Fasst aufeinanderfolgende G1-Befehle zusammen, sofern diese dieselben Parameter besitzen.
+    \item Dies führt zu einer kleineren Dateigröße und effizienterer Ausführung.
+  \end{itemize}
+\end{frame}
+
+\section{Fazit und Ausblick}
+\begin{frame}
+  \frametitle{Fazit und Ausblick}
+  \begin{itemize}
+    \item OpenCarve bietet einen intuitiven Workflow: Bild laden $\rightarrow$ Parameter einstellen $\rightarrow$ G-Code generieren.
+    \item Die 3D-Visualisierung ermöglicht eine Vorabkontrolle der Toolpaths.
+    \item Der Postprozessor sorgt für einen optimierten und maschinenfreundlichen G-Code.
+    \item Zukünftige Erweiterungen können zusätzliche Funktionen und erweiterte Simulationsmöglichkeiten umfassen. STL-Support
+  \end{itemize}
+\end{frame}
+
+\end{document}
