@@ -50,7 +50,41 @@ OpenCarve is a tool for converting grayscale images (e.g. heightmaps) into G-cod
     
     The generated G-code can be sent to your CNC machine.
 
-Screenshots
+## Parameter Settings Overview
+
+- **Pixel Size (mm):**  
+  Defines the scale of the conversion. It sets the distance between generated G-code paths.  
+  *Example:* For a 240-pixel wide image and a total toolpath width of 120 mm, the pixel size is 0.5 mm, meaning each pixel represents a 0.5 mm increment.
+
+- **Maximum Depth (mm):**  
+  Specifies the deepest cut. Darker areas in the image will result in cuts that approach this depth.
+
+- **Safe Z (mm):**  
+  Sets the safe travel height for rapid (non-cutting) movements. This helps avoid collisions when moving between cutting operations.
+
+- **Feed Rate XY (mm/min):**  
+  Determines the speed at which the tool moves horizontally (X and Y axes) during cutting.
+
+- **Feed Rate Z (mm/min):**  
+  Determines the speed for vertical (Z-axis) movements, used when plunging into or retracting from the material.
+
+- **Spindle Speed (RPM):**  
+  Defines the rotation speed of the spindle during cutting operations.
+
+- **Step-Down (mm):**  
+  Specifies the incremental depth per pass. If the maximum depth isn’t achieved in one pass, the tool will gradually cut deeper using this step value.
+
+- **Boundary Margin (mm):**  
+  Adds a margin around the toolpath. The effective machining area is reduced by twice the margin (one on each side).
+
+- **Toolpath Dimensions (mm):**  
+  Sets the overall width and height of the generated toolpath. The pixel positions are mapped to these dimensions, ensuring the final work area meets your specified size.
+
+- **Subdivisions:**  
+  (Optional) Determines the number of interpolation steps between adjacent pixels. This can smooth transitions between depth changes.
+
+
+## Screenshots
 
 ### Overview Screen
 ![Overview Screen](doc/OpenCarve.png)
@@ -76,6 +110,7 @@ Screenshots
 ## License
 
 OpenCarve is licensed under the GNU GPLv2. See LICENSE for details.
-Contributing
+
+## Contributing
 
 Contributions are welcome! Please fork the repository and submit your pull requests.
