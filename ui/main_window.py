@@ -61,11 +61,14 @@ class MainWindow(QtWidgets.QMainWindow):
         layout = QtWidgets.QVBoxLayout(widget)
         # BUTTON ROW
         button_layout = QtWidgets.QHBoxLayout()
+        
         self.load_button = QtWidgets.QPushButton("Load Image")
+        self.load_button.setToolTip("Click to load a grayscale image from your computer")
         self.load_button.clicked.connect(self.load_image)
         button_layout.addWidget(self.load_button)
-
+        
         self.gen_button = QtWidgets.QPushButton("Generate G-Code")
+        self.gen_button.setToolTip("Click to generate G-code from the loaded image")
         self.gen_button.clicked.connect(self.generate_gcode)
         self.gen_button.setEnabled(False)
         button_layout.addWidget(self.gen_button)
@@ -73,12 +76,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # SUBDIV SLIDER
         subdiv_layout = QtWidgets.QHBoxLayout()
-        subdiv_layout.addWidget(QtWidgets.QLabel("Subdivisions per Pixel:"))
+        subdiv_label = QtWidgets.QLabel("Subdivisions per Pixel:")
+        subdiv_label.setToolTip("More subdivisions smooth transitions between adjacent pixels")
+        subdiv_layout.addWidget(subdiv_label)
         self.subdiv_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
         self.subdiv_slider.setRange(0, 10)
         self.subdiv_slider.setValue(0)
         self.subdiv_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.subdiv_slider.setTickInterval(1)
+        self.subdiv_slider.setToolTip("Adjust the number of interpolation steps between pixels")
         subdiv_layout.addWidget(self.subdiv_slider)
         layout.addLayout(subdiv_layout)
 
@@ -90,48 +96,56 @@ class MainWindow(QtWidgets.QMainWindow):
         self.pixel_size_spin.setRange(0.01, 100.0)
         self.pixel_size_spin.setSingleStep(0.01)
         self.pixel_size_spin.setValue(0.1)
+        self.pixel_size_spin.setToolTip("Set the pixel size in mm; determines spacing between toolpaths")
         params_layout.addRow("Pixel Size (mm):", self.pixel_size_spin)
 
         self.max_depth_spin = QtWidgets.QDoubleSpinBox()
         self.max_depth_spin.setRange(0.0, 100.0)
         self.max_depth_spin.setSingleStep(0.1)
         self.max_depth_spin.setValue(2.0)
+        self.max_depth_spin.setToolTip("Maximum cutting depth in mm. Darker areas cut deeper")
         params_layout.addRow("Max Depth (mm):", self.max_depth_spin)
 
         self.safe_z_spin = QtWidgets.QDoubleSpinBox()
         self.safe_z_spin.setRange(0.0, 100.0)
         self.safe_z_spin.setSingleStep(0.5)
         self.safe_z_spin.setValue(2.0)
+        self.safe_z_spin.setToolTip("Safe Z height for rapid moves (non-cutting)")
         params_layout.addRow("Safe Z (mm):", self.safe_z_spin)
 
         self.feed_rate_xy_spin = QtWidgets.QSpinBox()
         self.feed_rate_xy_spin.setRange(1, 10000)
         self.feed_rate_xy_spin.setSingleStep(50)
         self.feed_rate_xy_spin.setValue(300)
+        self.feed_rate_xy_spin.setToolTip("Set the feed rate for horizontal (XY) movements in mm/min")
         params_layout.addRow("Feed Rate XY (mm/min):", self.feed_rate_xy_spin)
 
         self.feed_rate_z_spin = QtWidgets.QSpinBox()
         self.feed_rate_z_spin.setRange(1, 10000)
         self.feed_rate_z_spin.setSingleStep(25)
         self.feed_rate_z_spin.setValue(100)
+        self.feed_rate_z_spin.setToolTip("Set the feed rate for vertical (Z) movements in mm/min")
         params_layout.addRow("Feed Rate Z (mm/min):", self.feed_rate_z_spin)
 
         self.spindle_speed_spin = QtWidgets.QSpinBox()
         self.spindle_speed_spin.setRange(0, 50000)
         self.spindle_speed_spin.setSingleStep(500)
         self.spindle_speed_spin.setValue(20000)
+        self.spindle_speed_spin.setToolTip("Set the spindle speed in RPM")
         params_layout.addRow("Spindle Speed (RPM):", self.spindle_speed_spin)
 
         self.step_down_spin = QtWidgets.QDoubleSpinBox()
         self.step_down_spin.setRange(0.01, 100.0)
         self.step_down_spin.setSingleStep(0.1)
         self.step_down_spin.setValue(3.0)
+        self.step_down_spin.setToolTip("Step-down value (mm): incremental depth per pass")
         params_layout.addRow("Step-Down (mm):", self.step_down_spin)
 
         self.margin_spin = QtWidgets.QDoubleSpinBox()
         self.margin_spin.setRange(0.0, 100.0)
         self.margin_spin.setSingleStep(0.1)
         self.margin_spin.setValue(0.0)
+        self.margin_spin.setToolTip("Boundary margin (mm) to add a safety offset around the work area")
         params_layout.addRow("Boundary Margin (mm):", self.margin_spin)
         layout.addWidget(params_groupbox)
 
@@ -144,6 +158,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.width_mm_spin.setSingleStep(0.1)
         self.width_mm_spin.setValue(0.0)
         self.width_mm_spin.setEnabled(False)
+        self.width_mm_spin.setToolTip("Total width of the generated toolpath in mm")
         dims_layout.addRow("Width (mm):", self.width_mm_spin)
 
         self.height_mm_spin = QtWidgets.QDoubleSpinBox()
@@ -151,25 +166,30 @@ class MainWindow(QtWidgets.QMainWindow):
         self.height_mm_spin.setSingleStep(0.1)
         self.height_mm_spin.setValue(0.0)
         self.height_mm_spin.setEnabled(False)
+        self.height_mm_spin.setToolTip("Total height of the generated toolpath in mm")
         dims_layout.addRow("Height (mm):", self.height_mm_spin)
         layout.addWidget(dims_groupbox)
 
         # IMAGE DISPLAY
         self.image_label = QtWidgets.QLabel("No image loaded.")
         self.image_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.image_label.setToolTip("Displays the loaded image")
         layout.addWidget(self.image_label)
         self.image_label.resizeEvent = lambda event: self.update_image_preview()
 
         # CHECKBOXES
         self.invert_color_button = QtWidgets.QPushButton("Invert Colors")
+        self.invert_color_button.setToolTip("Invert the colors of the loaded image")
         self.invert_color_button.setDisabled(True)
         layout.addWidget(self.invert_color_button)
         self.invert_color_button.clicked.connect(self.invert_image)
 
         self.optimize_checkbox = QtWidgets.QCheckBox("Use postprocessor optimization")
+        self.optimize_checkbox.setToolTip("Merge similar G-code commands for a more efficient output")
         layout.addWidget(self.optimize_checkbox)
 
         self.simulate_checkbox = QtWidgets.QCheckBox("Time Estimation")
+        self.simulate_checkbox.setToolTip("Estimate machining time based on the generated G-code")
         layout.addWidget(self.simulate_checkbox)
 
         # SIGNALS
@@ -177,26 +197,31 @@ class MainWindow(QtWidgets.QMainWindow):
         self.width_mm_spin.valueChanged.connect(self.on_width_changed)
         self.height_mm_spin.valueChanged.connect(self.on_height_changed)
 
+
     def _setup_gcode_display(self, widget):
         layout = QtWidgets.QVBoxLayout(widget)
         # Create a read-only text edit to show generated G-code.
         self.gcode_text_edit = QtWidgets.QPlainTextEdit()
         self.gcode_text_edit.setReadOnly(True)
+        self.gcode_text_edit.setToolTip("Displays the generated G-code")
         layout.addWidget(self.gcode_text_edit)
         
         # Create a horizontal layout for buttons.
         btn_layout = QtWidgets.QHBoxLayout()
         # Add a "Copy G-code" button.
         self.copy_button = QtWidgets.QPushButton("Copy G-code")
+        self.copy_button.setToolTip("Copy the generated G-code to the clipboard")
         self.copy_button.clicked.connect(self.copy_gcode)
         btn_layout.addWidget(self.copy_button)
         
         # Add a "Save G-code" button.
         self.save_button = QtWidgets.QPushButton("Save G-code")
+        self.save_button.setToolTip("Save the generated G-code to a file")
         self.save_button.clicked.connect(self.save_gcode)
         btn_layout.addWidget(self.save_button)
         
         layout.addLayout(btn_layout)
+
 
     def save_gcode(self):
         # Open a file save dialog and write the G-code to the selected file.
