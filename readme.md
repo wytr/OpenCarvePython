@@ -99,7 +99,12 @@ OpenCarve is a tool for converting grayscale images (e.g. heightmaps) into G-cod
 
 ![Time Estimation](doc/OpenCarve-Time-Est.png)
 ### Example Heightmap
-![Time Estimation](assets/topoheightmap.png)
+
+![Example Heightmap](assets/topoheightmap.png)
+
+### Doom-Guy Bas-relief
+
+![Doomguy](assets/doomguy-sample.jpg)
 ## Technologies Used
 
 + Python: The main programming language.
