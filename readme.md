@@ -83,6 +83,27 @@ OpenCarve is a tool for converting grayscale images (e.g. heightmaps) into G-cod
 - **Subdivisions:**  
   (Optional) Determines the number of interpolation steps between adjacent pixels. This can smooth transitions between depth changes.
 
+## 3D Viewer Controls
+
+The 3D viewer offers interactive navigation of the generated toolpath. Here’s a quick overview of the controls:
+
+- **Orbit:**  
+  - **Middle Mouse Button:** Press and hold the middle mouse button to rotate the view around the scene.  
+  - **Default Mode:** If no modifier keys are held (or if the Shift or Control modifiers aren’t used), the viewer remains in orbit mode.
+
+- **Pan:**  
+  - **Both Left and Right Mouse Buttons:** Holding down both the left and right mouse buttons simultaneously will activate pan mode, allowing you to move the view laterally.  
+  - **Shift + Middle Mouse Button:** Alternatively, holding the Shift key while pressing the middle mouse button also triggers pan mode.  
+  - *Visual Cue:* When panning, the cursor changes to a navigation cross (SizeAllCursor).
+
+- **Zoom:**  
+  - **Mouse Wheel:** Scrolling the mouse wheel zooms in and out, adjusting the camera distance accordingly.
+
+- **Navigation Cube:**  
+  - A small orientation cube is displayed in the top-right corner. Clicking on a face of the cube will snap the view to a predefined orientation, helping you quickly reset the view.
+
+These controls provide a flexible way to inspect the toolpath from various angles and distances.
+
 
 ## Screenshots
 
