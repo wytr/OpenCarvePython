@@ -293,7 +293,16 @@ class MainWindow(QtWidgets.QMainWindow):
         )
         if file_path:
             from PIL import Image
-            self.original_img = Image.open(file_path).convert("L")
+            img = Image.open(file_path)
+            # Check if the image is 16-bit grayscale
+            if img.mode == "I;16":
+                # Convert using numpy: scale 16-bit values (0-65535) to 8-bit (0-255)
+                arr = np.array(img, dtype=np.uint16)
+                arr = (arr // 256).astype(np.uint8)
+                img = Image.fromarray(arr, mode="L")
+            else:
+                img = img.convert("L")
+            self.original_img = img
             self.image_array = np.array(self.original_img)
 
             self.pixmap = QtGui.QPixmap(file_path)
@@ -308,6 +317,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
             self.gen_button.setEnabled(True)
             self.invert_color_button.setEnabled(True)
+
+
+
 
     def invert_image(self):
         self.image_array = 255 - self.image_array
