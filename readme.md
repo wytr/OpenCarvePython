@@ -23,7 +23,7 @@ OpenCarve is a tool for converting grayscale images (e.g. heightmaps) into G-cod
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/OpenCarve.git
+   git clone https://github.com/wytr/OpenCarve.git
 
 2. Install dependencies:
     ```bash
